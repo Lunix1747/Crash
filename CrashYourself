@@ -1,0 +1,104 @@
+-- MADE BY LUNIX1747!!!
+
+-- Instances:
+
+local crash = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local TextLabel = Instance.new("TextLabel")
+local TextButton = Instance.new("TextButton")
+
+--Properties:
+
+crash.Name = "crash"
+crash.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+crash.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Frame.Parent = crash
+Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderSizePixel = 5
+Frame.Position = UDim2.new(0.47817716, 0, 0.253640771, 0)
+Frame.Size = UDim2.new(0, 266, 0, 85)
+
+TextLabel.Parent = Frame
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.BorderSizePixel = 4
+TextLabel.Size = UDim2.new(0, 266, 0, 29)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Text = "CRASH YOUSELF!"
+TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 14.000
+TextLabel.TextWrapped = true
+
+TextButton.Parent = Frame
+TextButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextButton.BorderSizePixel = 5
+TextButton.Position = UDim2.new(0.124060154, 0, 0.411764711, 0)
+TextButton.Size = UDim2.new(0, 200, 0, 50)
+TextButton.Font = Enum.Font.SourceSans
+TextButton.Text = "Click me to crash you game"
+TextButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextButton.TextSize = 14.000
+
+-- Scripts:
+
+local function DWXQK_fake_script() -- Frame.Dragify 
+	local script = Instance.new('LocalScript', Frame)
+
+	local UserInputService = game:GetService("UserInputService")
+	
+	local gui = script.Parent
+	
+	local dragging
+	local dragInput
+	local dragStart
+	local startPos
+	
+	local function update(input)
+		local delta = input.Position - dragStart
+		gui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+	end
+	
+	gui.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+			dragging = true
+			dragStart = input.Position
+			startPos = gui.Position
+	
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragging = false
+				end
+			end)
+		end
+	end)
+	
+	gui.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			dragInput = input
+		end
+	end)
+	
+	UserInputService.InputChanged:Connect(function(input)
+		if input == dragInput and dragging then
+			update(input)
+		end
+	end)
+end
+coroutine.wrap(DWXQK_fake_script)()
+local function BOVWRT_fake_script() -- crash.Script 
+	local script = Instance.new('Script', crash)
+
+	local crash = script.Parent
+	local CrashButton = script.Parent.Frame.TextButton
+	
+	CrashButton.MouseButton1Click:Connect(function()
+		while true do
+			print("Bye bye roblox client!")
+		end
+	end)
+end
+coroutine.wrap(BOVWRT_fake_script)()
